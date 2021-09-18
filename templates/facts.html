@@ -1,0 +1,23 @@
+    <!-- ======= Facts Section ======= -->
+    <section id="facts" class="facts">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Facts</h2>
+          <p>{{fact_text.description}}</p>
+        </div>
+
+        <div class="row">
+          {% for fact in facts %}
+          <div class="col-lg-3 col-md-6">
+            <div class="count-box">
+              {{fact.icon|safe}}
+              <span data-purecounter-start="0" data-purecounter-end="{{fact.number}}" data-purecounter-duration="1" class="purecounter"></span>
+              <p>{{fact.fact_name}}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </section><!-- End Facts Section -->

@@ -1,0 +1,62 @@
+<!-- ======= Resume Section ======= -->
+    <section id="resume" class="resume">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Resume</h2>
+          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <h3 class="resume-title">Sumary</h3>
+            <div class="resume-item pb-0">
+              <h4>{{about.header}}</h4>
+              <p><em></em></p>
+              <ul>
+                <li>{{about.address}}</li>
+                <li>{{about.phone}}</li>
+                <li><a href="{{about.website}}">{{about.website}}</a></li>
+                <li><a href="{{about.githublink}}">{{about.githublink}}</a></li>
+              </ul>
+            </div>
+
+            <h3 class="resume-title">Professional Experience</h3>
+            {% for exp in experience %}
+            <div class="resume-item">
+              <h4>{{exp.title}}</h4>
+              <h5>{{exp.description}}</h5>
+              <h5>{{exp.from_year | date:"Y"}} - {% if exp.to_year %}
+                                          {{exp.to_year  | date:"Y"}}
+                                        {% else %}
+                                          {{exp.present}}
+                                        {% endif %}
+              </h5>
+              <p><em>{{exp.company_name}} </em></p>
+              <ul>
+                {% for duty in exp.duty.all %}
+                  <li>{{duty}}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endfor %}
+          </div>
+            
+          <div class="col-lg-6">
+
+            <h3 class="resume-title">Certifications</h3>
+            {% for cert in certs %}
+            <div class="resume-item">
+              <h4>{{cert.cert_name}}</h4>
+              <h5>{{cert.cert_date}}</h5>
+              <p><em>{{cert.college}}</em></p>
+              <p>{{cert.description}}</p>
+            </div>
+            {% endfor %}
+          </div>
+
+            
+        </div>
+
+      </div>
+    </section><!-- End Resume Section -->
