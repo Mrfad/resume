@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-2$av_^*ipa=ya*o9^4ovs#!6j(%227tk840joeort+8p53p^wv'
 
-GOOGLE_RECAPTCHA_SECRET_KET = "6Lcv1HgcAAAAAILJ0PctTq3wZ_u2LJq7rhPg1qde"
+GOOGLE_RECAPTCHA_SECRET_KEY = "6Lcv1HgcAAAAAILJ0PctTq3wZ_u2LJq7rhPg1qde"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -144,3 +144,13 @@ EMAIL_USE_SSL = False
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND
 
 django_heroku.settings(locals())
+
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}

@@ -55,7 +55,13 @@
               <div class="my-3">
                 {% comment %} <div class="loading">Loading</div>
                 <div class="error-message"></div> {% endcomment %}
-                <div class="sent-message bg-success">{{msg}}</div>
+                {% if messages %}
+                  <ul class="messages">
+                    {% for message in messages %}
+                      <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
               </div>
               <script src='https://www.google.com/recaptcha/api.js'></script>
               <div class="g-recaptcha" data-sitekey="6Lcv1HgcAAAAAKgleLl1T1ps9ffGy712aAoSeKEQ"></div>

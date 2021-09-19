@@ -4,6 +4,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from datetime import date, datetime
 from .forms import ContactForm
+from django.conf import settings
+from django.contrib import messages
+import json
+import urllib
 
 def calculate_age(born):
     today = date.today()
@@ -19,17 +23,33 @@ def home(request):
     born = about.bday
     age = calculate_age(born)
     skills = Skill.objects.all()
-    msg = ""
+
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
-            msg = 'Message submitted successfuly'
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            req =  urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+ 
+            if result['success']:
+                form.save()
+                messages.success(request, 'Comment sent successfully')
+            else:
+                messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+
             # return HttpResponseRedirect(request.path_info)
+
     form = ContactForm()
     
     context = {'about':about, 'skills':skills, 'age':age,
                 'facts':facts, 'fact_text':fact_text,
                 'experience':experience, 'certs':certs,
-                'msg':msg, 'form':form}
+                'form':form}
     return render(request, 'home.html', context)
