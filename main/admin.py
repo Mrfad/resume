@@ -45,6 +45,6 @@ class CertificationAdmin(admin.ModelAdmin):
 admin.site.register(Certification, CertificationAdmin)
 
 class ContactAdmin(admin.ModelAdmin):
-    list_display=('name', 'email', 'subject', 'message')
+    list_display=('name', 'email', 'subject', 'message_date', 'message')
 admin.site.register(Contact, ContactAdmin)
 
