@@ -30,7 +30,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
 
+    #third party apps
     'widget_tweaks',
+    'import_export',
 ]
 
 MIDDLEWARE = [
