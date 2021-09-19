@@ -23,6 +23,6 @@ def send_new_officer_notification_email(sender, instance, created, **kwargs):
             subject,
             "From: " + name + "\nMessage: " + message,
             email,
-            ['fadyforextrader@gmail.com'],
+            [email, 'fadyforextrader@gmail.com'],
             fail_silently=False,
         )
